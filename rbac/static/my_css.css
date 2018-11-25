@@ -1,0 +1,51 @@
+/*2018.4.25*/
+/*CRM项目自定义CSS*/
+
+.my-login-body{
+    background-color: #9d9d9d;
+}
+
+#my-login-body{
+    margin-top: 200px;
+}
+
+.my-operation{
+    color: white;
+}
+
+.head{
+    width: 100%;
+    height: 60px;
+    background-color: #5cb85c;
+}
+
+
+.head a{
+    font-size: 26px;
+    padding-left: 145px;
+    margin-top: 100px;
+}
+
+.my-left-menu{
+    left: 60px;
+    top: 50px;
+    width: 200px;
+    bottom: 0;
+    position: fixed;
+    background-color: #9acfea;
+}
+
+.my-right-content{
+    top: 60px;
+    right: 60px;
+    bottom: 0;
+    left: 260px;
+    position: fixed;
+    overflow: auto;
+}
+
+.menu-list {
+    text-align: center;
+    font-size: 16px;
+    padding: 5px 0;
+}

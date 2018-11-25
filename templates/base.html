@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    {% if state %}
+        <title>新增数据页面</title>
+    {% else %}<title>编辑数据页面</title>
+    {% endif %}
+    <title>{% block title %}{% endblock title %}信息页面</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/my_css.css">
+    <link rel="stylesheet" href="/static/css/my_css.css">
+    <script src="/static/jquery-3.2.1.min.js"></script>
+    <script src="/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="/static/Highcharts/highcharts.js"></script>
+    <script src="/static/Highcharts/highcharts-3d.js"></script>
+    <script src="/static/Highcharts/exporting.js"></script>
+    <script src="/static/Highcharts/highcharts-zh_CN.js"></script>
+    <style>
+        input, select {
+            display: block;
+            width: 100%;
+            height: 34px;
+            padding: 6px 12px;
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #555;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+            -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+            -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+        }
+
+        .error {
+            color: red;
+        }
+        .filter a {
+            text-decoration: none;
+            color: #8c8c8c;
+        }
+
+        .filter a:hover {
+            color: orangered;
+        }
+
+        .active {
+            color: orangered !important;
+        }
+
+        h3 {
+            margin: 35px;
+        }
+    </style>
+</head>
+<body>
+<div>
+    {% load my_tags %}
+    {% get_nav_menu request %}
+    <div class="my-right-content">
+        {% block content %}
+        {% endblock content %}
+    </div>
+</div>
+</body>
+</html>

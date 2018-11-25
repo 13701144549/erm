@@ -1,0 +1,6 @@
+<div class="head"><a href="">{{ user.username }}</a></div>
+<div class="my-left-menu">
+    {% for menu_permission in menu_permission_list %}
+        <p class="menu-list"><a href="{{ menu_permission.0 }}">{{ menu_permission.1 }}</a></p>
+    {% endfor %}
+</div>

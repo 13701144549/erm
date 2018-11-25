@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div>
+        <span class="pull-left"><h4>角色信息表</h4></span>
+        {% if per.add %}
+            <span class="pull-right">
+                <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#myModal">
+                    <a href="/roles/add/">打开网页添加</a>
+                </button>
+            </span>
+        {% endif %}
+    </div>
+    <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+            <th>序号</th>
+            <th>角色编号</th>
+            <th>角色名</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for roles in roles_list %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ roles.pk }}</td>
+                <td>{{ roles.title }}</td>
+                <td>
+                    {% if per.edit %}
+                    <button class="btn btn-primary"><a class="my-operation"
+                                                       href="/roles/edit/{{ roles.pk }}">编辑</a></button>
+                    {% endif %}
+                    {% if per.delete %}
+                    <button class="btn btn-danger"><a class="my-operation"
+                                                      href="/roles/delete/{{ roles.pk }}">删除</a></button>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}

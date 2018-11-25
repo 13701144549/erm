@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock title %}信息页面</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/my_css.css">
+</head>
+<body>
+<div>
+    {% load my_tags %}
+    {% get_nav_menu request %}
+    <div class="my-right-content">
+        {% block content %}
+        {% endblock content %}
+    </div>
+</div>
+<script src="/static/jquery-3.2.1.min.js"></script>
+<script src="/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+</body>
+</html>

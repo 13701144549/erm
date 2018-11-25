@@ -1,0 +1,39 @@
+<div class="content">
+    {% if state %}
+        <h3 class="text-center">新增数据列表</h3>
+     {% else %}<h3 class="text-center">编辑数据列表</h3>
+    {% endif %}
+    <div class="container">
+        <div class="row" style="margin-bottom: 30px">
+            <div class="col-md-9 col-xs-6 col-md-offset-1">
+                <form action="" method="post" novalidate>
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div style="position: relative">
+                            <label for="">{{ field.label }}</label>
+                            {{ field }} <span class="error pull-right">{{ field.errors.0 }}</span>
+                            {% if field.is_pop %}
+                                <a href="" onclick="pop('{{ field.url }}')"
+                                   style="position: absolute;right: -30px;top: 20px"><span
+                                        style="font-size: 28px">+</span></a>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                    <button type="submit" class="btn btn-success pull-right" style="margin: 15px 0">提交</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function pop(url) {
+        window.open(url, "", "width=600,height=400,top=100,left=100")
+    }
+    function pop_response(pk, text, pop_res_id) {
+        var $option = $('<option>');
+        $option.html(text);
+        $option.val(pk);
+        $option.attr('selected', 'selected');
+        $('#' + pop_res_id).append($option)
+    }
+</script>

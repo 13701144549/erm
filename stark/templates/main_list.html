@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>stark主页面</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/css/my_css.css">
+    <link rel="stylesheet" href="/static/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <style>
+        #content {
+            margin-top: 70px;
+        }
+        .section{
+            margin: 10px 10px 10px 5px;
+            color: whitesmoke;
+        }
+        .app{
+            background-color: rgb(121,174,200);
+            width: 500px;
+        }
+        th{
+            padding: 5px;
+        }
+        .module{
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+{% include 'base/nav.html' %}
+<div id="content" class="container">
+    <h5>STARK 站点</h5>
+    <div id="content-main">
+        {% for item,foo in dic.items %}
+            <div class="module">
+                <table>
+                    <caption class="app">
+                        <a href="/stark/{{ item.lower }}/" class="section"
+                           title="Models in the {{ item }} application">{{ item }}</a>
+                    </caption>
+                    <tbody>
+                    {% for i in foo %}
+                        <tr>
+                            <th><a href="/stark/{{ item.lower }}/{{ i.lower }}/">{{ i }}</a></th>
+                            <td><a href="">添加</a></td>
+                            <td><a href="">编辑</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<script src="/static/jquery-3.2.1.min.js"></script>
+<script src="/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+</body>
+</html>

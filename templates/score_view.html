@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3 class="text-center">查看{{ student }}成绩</h3>
+<div class="container">
+    <div class="row">
+        <div class="col-md-9 col-md-offset-1">
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>班级</th>
+                    <th>班主任</th>
+                    <th>任课老师</th>
+                    <th>课程成绩</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for class in class_list %}
+                    <tr>
+                        <td>{{ class }}</td>
+                        <td>{{ class.tutor }}</td>
+                        <td>
+                            {% for teacher in class.teachers.all %}
+                                <span>{{ teacher }}</span>，
+                            {% endfor %}
+                        </td>
+                        <td>
+                            <a class="check_chart" cid="{{ class.pk }}" sid="{{ student.pk }}"
+                               sname="{{ student }}"><span>点击查看</span></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{#3D成绩分布图#}
+<div id="container"></div>
+<div id="sliders" class="hide">
+    <table>
+        <tr>
+            <td>α 角（内旋转角）</td>
+            <td><input id="alpha" type="range" min="0" max="45" value="15"/> <span id="alpha-value"
+                                                                                   class="value"></span></td>
+        </tr>
+        <tr>
+            <td>β 角（外旋转角）</td>
+            <td><input id="beta" type="range" min="-45" max="45" value="15"/> <span id="beta-value"
+                                                                                    class="value"></span></td>
+        </tr>
+        <tr>
+            <td>深度</td>
+            <td><input id="depth" type="range" min="20" max="100" value="50"/> <span id="depth-value"
+                                                                                     class="value"></span></td>
+        </tr>
+    </table>
+</div>
+<script>
+    $('.check_chart').on('click', function () {
+        $.ajax({
+            url: '',
+            type: 'get',
+            data: {
+                sid: $(this).attr('sid'),
+                cid: $(this).attr('cid')
+            },
+            success: function (data) {
+                $('#sliders').removeClass('hide');
+                var chart = new Highcharts.Chart({
+                    chart: {
+                        renderTo: 'container',
+                        type: 'column',
+                        options3d: {
+                            enabled: true,
+                            alpha: 15,
+                            beta: 15,
+                            depth: 50,
+                            viewDistance: 35
+                        }
+                    },
+                    title: {
+                        text: '交互性3D柱状图'
+                    },
+                    subtitle: {
+                        text: data.name + '成绩'
+                    },
+                    plotOptions: {
+                        column: {
+                            depth: 35
+                        }
+                    },
+                    xAxis: {
+                        categories: data.data_list[0]
+                    },
+                    yAxis: {
+                        title: {
+                            text: '成绩分数'
+                        }
+                    },
+                    series: [{
+                        name: '成绩分布图',
+                        data: data.data_list
+                    }]
+                });
+                // 将当前角度信息同步到 DOM 中
+                var alphaValue = document.getElementById('alpha-value'),
+                        betaValue = document.getElementById('beta-value'),
+                        depthValue = document.getElementById('depth-value');
+
+                function showValues() {
+                    alphaValue.innerHTML = chart.options.chart.options3d.alpha;
+                    betaValue.innerHTML = chart.options.chart.options3d.beta;
+                    depthValue.innerHTML = chart.options.chart.options3d.depth;
+                }
+
+                // 监听 sliders 的变化并更新图表
+                $('#sliders input').on('input change', function () {
+                    chart.options.chart.options3d[this.id] = this.value;
+                    showValues();
+                    chart.redraw(false);
+                });
+                showValues();
+            }
+        })
+    })
+</script>
+{% endblock content %}
+
+
+{% block title %}
+    个人成绩
+{% endblock title %}

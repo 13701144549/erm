@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="content">
+    <h3 class="text-center">删除数据</h3>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 col-md-offset-1">
+                <form action="" method="post" novalidate>
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-success">确认删除？</button>
+                    <a href="{{ url }}"><button type="button" class="btn btn-success">取消</button></a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+
+{% block title %}
+    删除数据
+{% endblock title %}

@@ -1,0 +1,23 @@
+/*2018.5.4*/
+/*STARK组件项目自定义CSS*/
+
+/*导航条相关*/
+.my-nav-col {
+    background-color: rgb(65, 118, 144);
+}
+
+.navbar-brand {
+    color: rgb(245, 221, 95);
+!important
+}
+
+.nav a {
+    color: whitesmoke;
+!important;
+}
+
+/*正文相关*/
+.content {
+    margin-top: 70px;
+}
+
